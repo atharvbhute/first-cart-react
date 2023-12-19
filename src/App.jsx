@@ -4,23 +4,19 @@ import { productService } from './appwrite/productService';
 
 
 function App() {
-  const [data, setData] = useState("df");
+  const [data, setData] = useState("");
 
   function createProduct(){
-    productService.createProduct({
-      name : "fridge",
-      description : "lorem ipsum gebrish",
-      brand : "worlpool",
+    productService.getProductByCategory({
       category_id : "sdasdf35asd2",
-      image : "aasdfadflskd254555"
-    }).then((response)=> setData(response)).catch((err)=> alert(err));
+    }).then((response)=> { console.log(response); setData(response)}).catch((err)=> alert(err));
   }
 
   return (
     <>
     <div>
       <button onClick={createProduct}>click to add</button>
-      <p>{data.name}</p>
+      <p>{data.documents[0].name}</p>
     </div>
      
     </>
