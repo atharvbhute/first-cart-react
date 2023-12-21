@@ -1,26 +1,41 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Sidebar } from './components/index'
 import { productService } from './appwrite/productService';
+import { useDispatch } from 'react-redux';
+import authService from './appwrite/authService';
+import { login, logout } from './features/authSlice';
+
 
 
 function App() {
-  const [data, setData] = useState("");
 
-  function createProduct(){
-    productService.getProductByCategory({
-      category_id : "sdasdf35asd2",
-    }).then((response)=> { console.log(response); setData(response)}).catch((err)=> alert(err));
-  }
+  const [loader, setLoader] = useState(true);
+  const [isUser, setIsUser] = useState("");
+  const dispatch = useDispatch();
 
-  return (
+  useEffect(()=>{
+    authService.getCurrentUser()
+    .then((results)=> {
+      if(results == null){
+        setIsUser('user logged out')
+        console.log("user not found");
+        dispatch(logout());
+      }else{
+        setIsUser('user logged in')
+        console.log("user found");
+        dispatch(login({userData : results}));      
+      }
+    })
+    .finally(() => setLoader(false));
+  },[]);
+
+  return !loader ? (
     <>
-    <div>
-      <button onClick={createProduct}>click to add</button>
-      <p>{data.documents[0].name}</p>
-    </div>
-     
+    <h1>Content</h1>
+    
     </>
+  ) : (
+    <h1>loading.....</h1>
   )
 }
-
 export default App
