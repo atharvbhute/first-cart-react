@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Sidebar } from './components/index'
+import { Sidebar, Header } from './components/index'
 import { productService } from './appwrite/productService';
 import { useDispatch } from 'react-redux';
 import authService from './appwrite/authService';
@@ -31,7 +31,7 @@ function App() {
 
   return !loader ? (
     <>
-    <h1>Content</h1>
+    <Header />
     
     </>
   ) : (
