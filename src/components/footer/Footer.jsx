@@ -29,7 +29,7 @@ function Footer() {
   return (
     <div className="max-w-2xl mx-auto">
       <footer className="p-4 bg-white rounded-lg shadow md:flex md:items-center md:justify-between md:p-6">
-        <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
+        <span className="text-sm text-gray-700 sm:text-center">
           ©
           <Link
             to="/"
@@ -44,7 +44,7 @@ function Footer() {
                 <li key={link.page}>
                 <Link
                   to={`${link.to}`}
-                  className="mr-4 text-sm text-gray-500 hover:underline md:mr-6 dark:text-gray-400"
+                  className="mr-4 text-sm text-gray-700 hover:underline md:mr-6"
                 >
                   {link.page}
                 </Link>

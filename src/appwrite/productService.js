@@ -16,7 +16,7 @@ class ProductService {
   } // constructor to create client and database everytime the instace is creted to use in methods
 
   // add products
-  async createProduct({ name, brand, price, category_id, description , image }) {
+  async createProduct({ product_name : name, brand, price, category_id, description , image }) {
     try {
       return await this.databases.createDocument(
         conf.appwriteDatabaseId,

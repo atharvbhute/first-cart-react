@@ -10,10 +10,12 @@ import AddProduct from "./seller/AddProduct";
 import ListProducts from "./home/ListProducts";
 import Input from "./Input";
 import Button from "./Button";
+import ProductCard from "./home/ProductCard";
 
 
 
 
-export {Sidebar, Header, Logo, AuthBtn, Footer, Login, 
-    Signup, Logout, AddProduct, ListProducts, Input, Button
+export { Sidebar, Header, Logo, AuthBtn, Footer, Login, 
+    Signup, Logout, AddProduct, ListProducts, Input, Button, ProductCard
+    
 }
