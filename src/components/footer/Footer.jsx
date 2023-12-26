@@ -34,7 +34,6 @@ function Footer() {
           <Link
             to="/"
             className="hover:underline"
-            target="_blank"
           >
             FirstKart
           </Link>
