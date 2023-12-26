@@ -6,12 +6,12 @@ function Header() {
     const navigator = [
         {
             page : "Home",
-            to : "/home",
+            to : "/",
             isActive : false
         },
         {
             page : "Become Seller",
-            to : "/Seller",
+            to : "/seller/add-products",
             isActive : false
         },
     ]

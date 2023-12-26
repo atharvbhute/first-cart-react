@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
-import { Sidebar, Header } from './components/index'
+import { Sidebar, Header, Footer } from './components/index'
 import { productService } from './appwrite/productService';
 import { useDispatch } from 'react-redux';
 import authService from './appwrite/authService';
 import { login, logout } from './features/authSlice';
-
+import { Outlet } from 'react-router-dom';
 
 
 function App() {
@@ -32,7 +32,10 @@ function App() {
   return !loader ? (
     <>
     <Header />
-    
+    <div className='flex justify-center px-7 py-4'>
+      <Outlet />
+    </div>
+    <Footer />
     </>
   ) : (
     <h1>loading.....</h1>
