@@ -15,7 +15,7 @@ function Logout() {
     if (isLoggedIn) {
       authService.logout().then(() => {
         dispatch(logout())
-        navigate(-1);
+        navigate("/login");
       })
     }else{
       navigate("/login");

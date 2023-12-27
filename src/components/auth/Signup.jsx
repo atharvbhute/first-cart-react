@@ -15,6 +15,7 @@ function Signup() {
 
   const isLoggedIn = useSelector(state =>  state.auth.status);
 
+  // for signup page protection
   useEffect(() => {
     if (isLoggedIn) {
       navigate("/")
@@ -23,7 +24,6 @@ function Signup() {
 
   const signup = async(data) => {
     setError("");
-    console.log(data);
     try {
       const userDetails = await authService.createAccount(data);
       if (userDetails) {
@@ -33,9 +33,12 @@ function Signup() {
           navigate(-1);
         }     
       }
-    } catch (error) {
-      setError(error);
+      console.log(error);
+    } catch (err) {
+      console.log("Signup Error", err);
+      setError(err);
     }
+    console.log(error);
   }
   return (
     <div className="min-h-screen flex justify-center">
@@ -79,7 +82,7 @@ function Signup() {
             <Button type="submit">Login</Button>
           </form>
         </div>
-        {error && <p>{error}</p>}        
+        <p className='bg-red-300'>{error}</p>
       </div>
     </div>
   );

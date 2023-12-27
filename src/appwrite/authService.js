@@ -18,7 +18,7 @@ class AuthService {
       await this.account.create(ID.unique(), email, password, username);
       return await this.loginUser({email, password});
     } catch (error) {
-      console.log(error);
+      console.log("Error :",error);
     }
   }
 
