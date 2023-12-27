@@ -5,7 +5,7 @@ import authService from "../../appwrite/authService";
 import { Link } from "react-router-dom";
 
 function AuthBtn() {
-  const isLoggedIn = useSelector((state) => state.status);
+  const isLoggedIn = useSelector(state =>  state.auth.status);
 
   return isLoggedIn ? (
       <div className="inline-flex items-center h-full ml-5 md:w-2/5 md:justify-end md:ml-0">

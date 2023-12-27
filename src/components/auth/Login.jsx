@@ -1,10 +1,43 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {Input, Button} from '../index';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import authService from '../../appwrite/authService';
+import { useDispatch, useSelector } from 'react-redux';
+import { login as authLogin } from '../../features/authSlice';
 
 function Login() {
   const {register, handleSubmit} = useForm();
+  const [error, setError] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const isLoggedIn = useSelector(state =>  state.auth.status);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/")
+    }
+  },[]);
+
+  const login = async(data) => {
+    setError("");
+    console.log(data);
+    try {
+      const userDetails = await authService.loginUser(data);
+      if (userDetails) {
+        const userData = await authService.getCurrentUser();
+        if (userData) {
+          dispatch(authLogin(userData));
+          navigate(-1);
+        }     
+      }
+    } catch (error) {
+      setError(error);
+    }
+  }
+
+
   return (
     <div className="min-h-screen flex justify-center">
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
@@ -13,7 +46,7 @@ function Login() {
           Don't have an account ? {" "}<Link to="/signup" className='underline'>Signup here</Link>
         </p>
         <div className="mb-4">
-          <form action="" className="space-y-2">
+          <form onSubmit={handleSubmit(login)} className="space-y-2">
 
             <Input
             type = "email"
