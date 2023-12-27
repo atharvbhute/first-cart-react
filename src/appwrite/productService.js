@@ -97,6 +97,14 @@ class ProductService {
         console.log(error);
     }    
   }
+
+  async uploadImage({file}){
+    
+  }
+
+  async getFilePreview(){
+    
+  }
 } 
 
 export const productService = new ProductService();
