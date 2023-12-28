@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { login, logout } from "../../features/authSlice";
-import authService from "../../appwrite/authService";
+import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 function AuthBtn() {

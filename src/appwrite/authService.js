@@ -1,5 +1,7 @@
 import { Client, Account, ID } from "appwrite";
 import conf from "../conf/conf";
+import { useDispatch } from "react-redux";
+import { setSignUpError } from "../features/authSlice";
 
 class AuthService {
   client = new Client();
@@ -13,12 +15,13 @@ class AuthService {
     this.account = new Account(this.client);
   }
 
-  async createAccount({ username, email, password }) {
+  async createAccount({ username, email, password }, dispatch) {
+
     try {
       await this.account.create(ID.unique(), email, password, username);
       return await this.loginUser({email, password});
     } catch (error) {
-      console.log("Error :",error);
+      dispatch(setSignUpError({error : error.message}))
     }
   }
 
@@ -26,7 +29,6 @@ class AuthService {
     try {
       return await this.account.createEmailSession(email,password);      
     } catch (error) {
-      console.log(error);
     }
   }
 

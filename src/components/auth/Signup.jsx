@@ -1,15 +1,15 @@
-import React, {useState, useEffect} from 'react'
+import React, {useEffect} from 'react'
 import {Input, Button} from '../index';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import authService from '../../appwrite/authService';
 import { useDispatch, useSelector } from 'react-redux';
-import { login as authLogin } from '../../features/authSlice';
+import { login as authLogin, setSignUpError } from '../../features/authSlice';
 
 function Signup() {
 
   const { register, handleSubmit } = useForm();
-  const [error, setError] = useState("");
+  const error = useSelector(state => state.auth.signUpError)
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -23,9 +23,9 @@ function Signup() {
   },[]);
 
   const signup = async(data) => {
-    setError("");
+    dispatch(setSignUpError({error : ""}))
     try {
-      const userDetails = await authService.createAccount(data);
+      const userDetails = await authService.createAccount(data, dispatch);
       if (userDetails) {
         const userData = await authService.getCurrentUser();
         if (userData) {
@@ -33,12 +33,9 @@ function Signup() {
           navigate(-1);
         }     
       }
-      console.log(error);
     } catch (err) {
-      console.log("Signup Error", err);
-      setError(err);
+      dispatch(setSignUpError({error : err.message}))
     }
-    console.log(error);
   }
   return (
     <div className="min-h-screen flex justify-center">
