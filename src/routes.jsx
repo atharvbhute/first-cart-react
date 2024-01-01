@@ -1,6 +1,7 @@
 import { createBrowserRouter, Route, createRoutesFromElements } from 'react-router-dom'
-import {AddProduct, Login, Signup, Logout, ListProducts} from "./components/index.js"
+import {AddProduct, Login, Signup, Logout} from "./components/index.js"
 import App from './App.jsx'
+import { ListProducts } from './pages/index.js'
 
 export const router = createBrowserRouter(
   createRoutesFromElements(

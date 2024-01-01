@@ -1,5 +1,5 @@
 import React from 'react'
-import {ProductCard} from "../index"
+import {ProductCard} from "../components/index"
 
 function ListProducts() {
   return (
