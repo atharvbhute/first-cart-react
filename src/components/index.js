@@ -10,11 +10,11 @@ import AddProduct from "./seller/AddProduct";
 import Input from "./Input";
 import Button from "./Button";
 import ProductCard from "./ProductCard";
-
-
+import Select from "./Select";
 
 
 export { Sidebar, Header, Logo, AuthBtn, Footer, Login, 
-    Signup, Logout, AddProduct, Input, Button, ProductCard
+    Signup, Logout, AddProduct, Input, Button, ProductCard,
+    Select
     
 }

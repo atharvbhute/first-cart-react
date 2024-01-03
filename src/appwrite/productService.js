@@ -1,9 +1,10 @@
-import { Client, Databases, ID, Query } from "appwrite";
+import { Client, Databases, ID, Query, Storage } from "appwrite";
 import conf from "../conf/conf";
 
 class ProductService {
   client = new Client();
   databases;
+  storage;
 
   constructor() {
     console.log(conf.appwriteURL, conf.appwriteProjectId);
@@ -12,6 +13,7 @@ class ProductService {
       .setProject(conf.appwriteProjectId);
 
     this.databases = new Databases(this.client);
+    this.storage = new Storage(this.client)
 
   } // constructor to create client and database everytime the instace is creted to use in methods
 
@@ -98,8 +100,29 @@ class ProductService {
     }    
   }
 
+  async listCategories(){
+    try {
+      const categories = await this.databases.listDocuments(
+          conf.appwriteDatabaseId,
+          conf.appwriteCollectionIdCategories,
+      )
+      console.log(categories.documents);
+      return categories.documents;
+  } catch (error) {
+      return error;
+  }
+  }
+
   async uploadImage({file}){
-    
+    try {
+      return await this.storage.createFile(
+        conf.appwriteBucketId,
+        ID.unique(),
+        file
+      )
+    } catch (error) {
+      return error;
+    }
   }
 
   async getFilePreview(){
