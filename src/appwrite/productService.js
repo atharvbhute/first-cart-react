@@ -113,7 +113,7 @@ class ProductService {
   }
   }
 
-  async uploadImage({file}){
+  async uploadImage(file){
     try {
       return await this.storage.createFile(
         conf.appwriteBucketId,

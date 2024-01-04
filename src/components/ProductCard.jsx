@@ -1,6 +1,7 @@
 import React from 'react'
 
-function ProductCard() {
+function ProductCard({product}) {
+  console.log(product);
   return (
     <div className="flex mt-3">
       <div className="mx-auto px-5">
@@ -10,10 +11,10 @@ function ProductCard() {
             src="https://placehold.co/200x150/png"
             alt="product"
           />
-          <p className="my-4 pl-4 text-gray-500">Product Name</p>
-          <p className="mb-4 ml-4 text-[15px] font-semibold text-gray-800">$399</p>
+          <p className="my-4 pl-4 text-gray-500">{product.name}</p>
+          <p className="mb-4 ml-4 text-[15px] font-semibold text-gray-800"><span>Rs. </span>{product.price}</p>
         </div>
-      </div>
+      </div>  
     </div>
   );
 }
