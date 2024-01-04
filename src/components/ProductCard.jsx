@@ -1,7 +1,6 @@
 import React from 'react'
 
 function ProductCard({product}) {
-  console.log(product);
   return (
     <div className="flex mt-3">
       <div className="mx-auto px-5">

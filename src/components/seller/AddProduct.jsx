@@ -7,26 +7,26 @@ import { useNavigate } from 'react-router-dom';
 function AddProduct() {
   const {register, handleSubmit, control} = useForm();
   const [options, setOptions] = React.useState([]);
-  const selectRef = useRef(null);
   const navigate = useNavigate();
 
   useEffect(()=>{
     productService.listCategories()
     .then((productLists)=>{setOptions(productLists)})
-    console.log(selectRef.current);
   },[])
 
   const addProduct = async(data) => {
-    try {
-      const file = await productService.uploadImage(data.file[0]);
-      if (file) {
-        const product = await productService.createProduct({...data, image: file.$id})  
-        console.log("product added successfuly");    
-        navigate('/')
-      }
-    } catch (error) {
-      console.log(error);      
-    }
+    console.log(data);
+    // unComment once form is validated
+    // try {
+    //   const file = await productService.uploadImage(data.file[0]);
+    //   if (file) {
+    //     const product = await productService.createProduct({...data, image: file.$id})  
+    //     console.log("product added successfuly");    
+    //     navigate('/')
+    //   }
+    // } catch (error) {
+    //   console.log(error);      
+    // }
   }
   return (
     <div className="min-h-screen flex justify-center">
@@ -76,7 +76,7 @@ function AddProduct() {
               })}
             />
             <Select 
-            ref = {selectRef} 
+            control={control}
             options={options} 
             {...register("category_id", {
               required: true,

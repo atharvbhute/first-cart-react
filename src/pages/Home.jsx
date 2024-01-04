@@ -2,10 +2,12 @@ import React, { useEffect, useRef, useState } from 'react'
 import {ProductCard} from "../components/index"
 import { productService } from '../appwrite/productService';
 import Sample from '../components/Sample';
+import { useForm } from 'react-hook-form';
 
 function ListProducts() {
   const [products, setProducts] = useState([])
   const sampleRef = useRef(null);
+  const {register, handleSubmit} = useForm();
 
   useEffect(()=>{
     console.log(sampleRef.current);
@@ -23,6 +25,10 @@ function ListProducts() {
       }
     })()
   },[]);
+
+  const printData = (data)=>{
+    console.log(data);
+  }
   return (
     <>
     <div className='flex flex-wrap justify-center'>
@@ -30,7 +36,14 @@ function ListProducts() {
         return <ProductCard product={product} key={product.$id}/>
       })}
     </div>
-    <Sample ref={sampleRef}/>
+    <form onSubmit={handleSubmit(printData)}>
+    <Sample ref={sampleRef}
+    {
+      ...register("sample")
+    }/>
+    <button type='submit'>Sub</button>
+    </form>
+    
     </>
     
     
