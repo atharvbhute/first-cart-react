@@ -125,8 +125,13 @@ class ProductService {
     }
   }
 
-  async getFilePreview(){
-    
+  async getFilePreview(file_id){
+    try {
+      const imagePreview = this.storage.getFilePreview(conf.appwriteBucketId, file_id);
+      return imagePreview;
+    } catch (error) {
+      return error
+    }
   }
 } 
 

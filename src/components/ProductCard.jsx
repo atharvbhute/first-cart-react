@@ -1,13 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { productService } from '../appwrite/productService';
 
 function ProductCard({product}) {
+  const [image, setImage] = useState("");
+  useEffect(() => {
+    productService.getFilePreview(product.image)
+    .then((image) => {
+      setImage(image);
+    })
+    .catch((err)=> console.log(err));
+  }, []);
   return (
     <div className="flex mt-3">
       <div className="mx-auto px-5">
         <div className="max-w-xs cursor-pointer rounded-lg bg-white p-2 shadow duration-150 hover:scale-105 hover:shadow-md">
           <img
-            className="w-full rounded-lg object-cover object-center"
-            src="https://placehold.co/200x150/png"
+            className="rounded-lg object-cover object-center h-[200px]"
+            src={image}
             alt="product"
           />
           <p className="my-4 pl-4 text-gray-500">{product.name}</p>

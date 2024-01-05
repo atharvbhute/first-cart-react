@@ -17,16 +17,16 @@ function AddProduct() {
   const addProduct = async(data) => {
     console.log(data);
     // unComment once form is validated
-    // try {
-    //   const file = await productService.uploadImage(data.file[0]);
-    //   if (file) {
-    //     const product = await productService.createProduct({...data, image: file.$id})  
-    //     console.log("product added successfuly");    
-    //     navigate('/')
-    //   }
-    // } catch (error) {
-    //   console.log(error);      
-    // }
+    try {
+      const file = await productService.uploadImage(data.file[0]);
+      if (file) {
+        const product = await productService.createProduct({...data, image: file.$id})  
+        console.log("product added successfuly");    
+        navigate('/')
+      }
+    } catch (error) {
+      console.log(error);      
+    }
   }
   return (
     <div className="min-h-screen flex justify-center">

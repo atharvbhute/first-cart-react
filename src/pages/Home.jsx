@@ -1,18 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import {ProductCard} from "../components/index"
 import { productService } from '../appwrite/productService';
-import Sample from '../components/Sample';
-import { useForm } from 'react-hook-form';
 
 function ListProducts() {
-  const [products, setProducts] = useState([])
-  const sampleRef = useRef(null);
-  const {register, handleSubmit} = useForm();
-
-  useEffect(()=>{
-    console.log(sampleRef.current);
-  },[sampleRef])
-
+  const [products, setProducts] = useState([]);
   useEffect(()=>{
     ;(async()=>{
       try {
@@ -35,18 +26,8 @@ function ListProducts() {
       {products.map((product) => {
         return <ProductCard product={product} key={product.$id}/>
       })}
-    </div>
-    <form onSubmit={handleSubmit(printData)}>
-    <Sample ref={sampleRef}
-    {
-      ...register("sample")
-    }/>
-    <button type='submit'>Sub</button>
-    </form>
-    
-    </>
-    
-    
+    </div>    
+    </>   
   )
 }
 
