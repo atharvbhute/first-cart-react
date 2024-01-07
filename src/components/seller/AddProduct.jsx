@@ -5,10 +5,9 @@ import { productService } from '../../appwrite/productService';
 import { useNavigate } from 'react-router-dom';
 
 function AddProduct() {
-  const {register, handleSubmit, control, formState: {errors}} = useForm();
+  const {register, handleSubmit, control, formState: {errors}, setError, clearErrors} = useForm();
   const [options, setOptions] = React.useState([]);
   const navigate = useNavigate();
-  const [error, setError] = useState(null);
 
   useEffect(()=>{
     productService.listCategories()
@@ -17,19 +16,26 @@ function AddProduct() {
 
   const addProduct = async(data) => {
     console.log(data);
-    // unComment once form is validated
-    try {
-      // if (data.file[0]?.type) {
-        
-      // }
-      const file = await productService.uploadImage(data.file[0]);
-      if (file) {
-        const product = await productService.createProduct({...data, image: file.$id})  
-        console.log("product added successfuly");    
-        navigate('/')
+    if (
+      data.file[0]?.type == "image/jpg" ||
+      data.file[0]?.type == "image/jpeg"
+    ) {
+      try {
+        const file = await productService.uploadImage(data.file[0]);
+        if (file) {
+          const product = await productService.createProduct({
+            ...data,
+            image: file.$id,
+          });
+          console.log("product added successfuly");
+          navigate("/");
+        }
+      } catch (error) {
+        setError("service_error",{type: "custom", message: error})
+        setTimeout( () => clearErrors("service_error"), 10000)
       }
-    } catch (error) {
-      setError(error);   
+    } else {
+      setError("file", { type: "custom", message: "file must be jpg" });
     }
   }
   return (
@@ -41,7 +47,7 @@ function AddProduct() {
         </p>
         <div className="mb-4">
         
-        {error && <p className='text-red-800 text-sm'>{error?.message}</p>}
+        {errors.service_error && <p className='text-white text-sm bg-red-500 rounded-md p-2'>{errors?.service_error?.message.message + " try again in 10 seconds"}</p>}
           <form onSubmit={handleSubmit(addProduct)} className="space-y-2">
             <Input
               lable="product name :"
@@ -107,15 +113,6 @@ function AddProduct() {
         </div>
       </div>
     </div>
-    // <div>
-    //   <form onSubmit={handleSubmit(addProduct)}>
-    //     <Input lable = "product name :" placeholder = "Enter product name"
-    //     {...register("productname",{
-    //       required: true
-    //     })}/>
-    //
-    //   </form>
-    // </div>
   );
 }
 

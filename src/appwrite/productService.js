@@ -19,16 +19,12 @@ class ProductService {
 
   // add products
   async createProduct({ product_name : name, brand, price, category_id, description , image }) {
-    try {
       return await this.databases.createDocument(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionIdProducts,
         ID.unique(),
         { name, brand, price, category_id, image, description}
       );
-    } catch (error) {
-        console.log(error);
-    }
   } // this method/ features return an object with product details
 
   // updateProduct

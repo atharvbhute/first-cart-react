@@ -7,8 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login as authLogin } from '../../features/authSlice';
 
 function Login() {
-  const {register, handleSubmit} = useForm();
-  const [error, setError] = useState("");
+  const {register, handleSubmit, formState: {errors}, setError, clearErrors} = useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -21,7 +20,6 @@ function Login() {
   },[]);
 
   const login = async(data) => {
-    setError("");
     console.log(data);
     try {
       const userDetails = await authService.loginUser(data);
@@ -33,10 +31,12 @@ function Login() {
         }     
       }
     } catch (error) {
-      setError(error);
+      setError("auth_service_error", {type: "custom", message: error.message})
+      setTimeout(() => {
+        clearErrors('auth_service_error')
+      }, 7000);
     }
   }
-
 
   return (
     <div className="min-h-screen flex justify-center">
@@ -46,26 +46,30 @@ function Login() {
           Don't have an account ? {" "}<Link to="/signup" className='underline'>Signup here</Link>
         </p>
         <div className="mb-4">
+        {errors.auth_service_error && <p className='text-white text-sm bg-red-500 rounded-md p-2 w-full'>{errors?.auth_service_error?.message + " try again in 10 seconds"}</p>}
           <form onSubmit={handleSubmit(login)} className="space-y-2">
-
             <Input
             type = "email"
               lable="Email :"
               placeholder="email"
               {...register("email", {
-                required: true,
+                required: "email is required",
+                pattern: {
+                  value: /^\S+@\S+\.\S+$/,
+                  message: "invalid email"
+                }
               })}
             />
-
+            <p className='text-red-900 text-sm inline-block'>{errors?.email?.message}</p>
             <Input
             type = "password"
               lable="password :"
               placeholder="password"
               {...register("password", {
-                required: true,
+                required: "password is required",
               })}
             />
-
+            <p className='text-red-900 text-sm'>{errors?.password?.message}</p>
             <Button type="submit">Login</Button>
           </form>
         </div>
