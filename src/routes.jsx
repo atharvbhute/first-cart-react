@@ -2,7 +2,7 @@ import { createBrowserRouter, Route, createRoutesFromElements } from 'react-rout
 import {AddProduct, Login, Signup, Logout} from "./components/index.js"
 import App from './App.jsx'
 import { ListProducts } from './pages/index.js'
-import {SellerAddProducts} from './pages/index.js'
+import {SellerAddProducts, Cart} from './pages/index.js'
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -13,6 +13,7 @@ export const router = createBrowserRouter(
       <Route path='/seller/add-products' element={<SellerAddProducts />} />
       <Route path='/login' element={<Login />} />
       <Route path='/signup' element={<Signup />} />
+      <Route path='/cart' element={<Cart />} />
     </Route>
   )
 )

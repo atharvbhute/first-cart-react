@@ -11,10 +11,11 @@ import Input from "./Input";
 import Button from "./Button";
 import ProductCard from "./ProductCard";
 import Select from "./Select";
+import CartBtn from "./CartBtn";
+import CartItem from "./Cart/CartItem";
 
 
 export { Sidebar, Header, Logo, AuthBtn, Footer, Login, 
     Signup, Logout, AddProduct, Input, Button, ProductCard,
-    Select
-    
+    Select, CartBtn, CartItem
 }

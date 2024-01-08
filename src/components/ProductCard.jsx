@@ -21,8 +21,10 @@ function ProductCard({product}) {
             alt="product"
           />
           <p className="my-4 pl-4 text-gray-500">{product.name}</p>
-          <p className="mb-4 ml-4 text-[15px] font-semibold text-gray-800"><span>Rs. </span>{product.price}</p>
-          <p className='text-center text-sm bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 focus:outline-none'>Add To Cart</p>          
+          <div className='flex justify-between items-center text-black'> 
+          <p className="ml-4 text-[15px] font-semibold text-gray-800"><span>Rs. </span>{product.price}</p>
+          <button className='text-sm bg-blue-600 p-1 rounded-lg text-white hover:bg-blue-900'>Add To Cart</button>
+          </div>  
         </div>
       </div>  
     </div>

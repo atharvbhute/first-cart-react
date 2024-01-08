@@ -6,13 +6,13 @@ function AuthBtn() {
   const isLoggedIn = useSelector(state =>  state.auth.status);
 
   return isLoggedIn ? (
-      <div className="inline-flex items-center h-full ml-5 md:w-2/5 md:justify-end md:ml-0">
+      <div className="flex items-center h-full ml-5 md:w-2/5 md:ml-0">
         <Link to="/logout" className="mr-5 font-medium hover:text-gray-900">
           Logout
         </Link>
       </div>
   ) : (
-    <div className="inline-flex items-center h-full ml-5 md:w-2/5 md:justify-end md:ml-0">
+    <div className="flex items-center ml-5">
       <Link to="/login" className="mr-5 font-medium hover:text-gray-900">
         Login
       </Link>
