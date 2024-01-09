@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import authService from './appwrite/authService';
 import { login, logout } from './redux/features/authSlice';
 import { Outlet } from 'react-router-dom';
+import { ClipLoader } from 'react-spinners';
 
 
 function App() {
@@ -38,7 +39,16 @@ function App() {
     <Footer />
     </>
   ) : (
-    <h1>loading.....</h1>
+    <ClipLoader
+        color={"blue"}
+        loading={loader}
+        cssOverride={{display: "block",
+        margin: "0 auto",
+        borderColor: "blue",}}
+        size={20}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
   )
 }
 export default App
