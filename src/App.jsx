@@ -3,7 +3,7 @@ import { Sidebar, Header, Footer } from './components/index'
 import { productService } from './appwrite/productService';
 import { useDispatch } from 'react-redux';
 import authService from './appwrite/authService';
-import { login, logout } from './features/authSlice';
+import { login, logout } from './redux/features/authSlice';
 import { Outlet } from 'react-router-dom';
 
 

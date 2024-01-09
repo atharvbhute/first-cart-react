@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import authService from '../../appwrite/authService'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
-import { logout } from '../../features/authSlice';
+import { logout } from '../../redux/features/authSlice';
 
 function Logout() {
 

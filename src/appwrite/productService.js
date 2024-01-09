@@ -56,14 +56,10 @@ class ProductService {
 
   // list all products // return an array with all products objects
   async getProducts(){
-    try {
-        return await this.databases.listDocuments(
-            conf.appwriteDatabaseId,
-            conf.appwriteCollectionIdProducts,
-        )        
-    } catch (error) {
-        console.log(error); 
-    }
+    return await this.databases.listDocuments(
+      conf.appwriteDatabaseId,
+      conf.appwriteCollectionIdProducts
+    );
   }
 
   // get a single product by id // returns an object
@@ -97,16 +93,11 @@ class ProductService {
   }
 
   async listCategories(){
-    try {
       const categories = await this.databases.listDocuments(
-          conf.appwriteDatabaseId,
-          conf.appwriteCollectionIdCategories,
-      )
-      console.log(categories.documents);
+        conf.appwriteDatabaseId,
+        conf.appwriteCollectionIdCategories
+      );
       return categories.documents;
-  } catch (error) {
-      return error;
-  }
   }
 
   async uploadImage(file){

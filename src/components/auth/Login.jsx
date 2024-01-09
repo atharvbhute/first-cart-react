@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import authService from '../../appwrite/authService';
 import { useDispatch, useSelector } from 'react-redux';
-import { login as authLogin } from '../../features/authSlice';
+import { login as authLogin } from '../../redux/features/authSlice';
 
 function Login() {
   const {register, handleSubmit, formState: {errors}, setError, clearErrors} = useForm();
