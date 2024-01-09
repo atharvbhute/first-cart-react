@@ -28,8 +28,8 @@ function Footer() {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <footer className="p-4 bg-white rounded-lg shadow md:flex md:items-center md:justify-between md:p-6">
-        <span className="text-sm text-gray-700 sm:text-center">
+      <footer className="p-4 m-2 bg-white rounded-lg shadow md:flex md:items-center md:justify-between md:p-6 space-x-5">
+        <span className="text-sm text-gray-700 text-center flex justify-center">
           ©
           <Link
             to="/"

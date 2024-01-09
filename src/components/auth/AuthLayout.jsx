@@ -10,7 +10,6 @@ function AuthLayout({authProtection = true, children}) {
   const [authNeeded, setAuthNeede] = useState(false);
   const navigate = useNavigate();
 
-
   useEffect(()=>{
     if (authStatus == false && authProtection == true) {
         setAuthNeede(true);

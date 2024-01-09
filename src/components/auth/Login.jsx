@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {Input, Button, BtnLoader} from '../index';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import authService from '../../appwrite/authService';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { login as authLogin } from '../../redux/features/authSlice';
 
 function Login() {
@@ -11,8 +11,6 @@ function Login() {
   const [loaginLoader, setLoginLoader] = useState(false)
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const isLoggedIn = useSelector(state =>  state.auth.status);
 
   const login = async(data) => {
     console.log(data);

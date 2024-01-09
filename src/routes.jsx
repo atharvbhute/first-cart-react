@@ -1,5 +1,5 @@
 import { createBrowserRouter, Route, createRoutesFromElements } from 'react-router-dom'
-import {AddProduct, Login, Signup, Logout, AuthLayout} from "./components/index.js"
+import { Login, Signup, Logout, AuthLayout} from "./components/index.js"
 import App from './App.jsx'
 import { ListProducts } from './pages/index.js'
 import {SellerAddProducts, Cart} from './pages/index.js'

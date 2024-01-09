@@ -5,10 +5,10 @@ function AuthLogin() {
   return (
     <div className='mt-28 flex justify-center items-center'>
         <p className="text-gray-600 mb-6">
-          Please login to continue
-        </p>
-        <p>
-            <Link to="/login" className='underline'>Login here</Link>
+          Please login first !{" "}
+          <Link to="/login" className="underline">
+            click here to login
+          </Link>
         </p>
     </div>
   )
