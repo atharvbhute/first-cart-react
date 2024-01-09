@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react'
-import {Input, Button} from '../index';
+import React, {useEffect, useState} from 'react'
+import {Input, Button, BtnLoader} from '../index';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import authService from '../../appwrite/authService';
@@ -8,11 +8,11 @@ import { login as authLogin } from '../../redux/features/authSlice';
 
 function Signup() {
 
+  const [signUpLoading, setSignupLoading] = useState(false);
   const { register, handleSubmit, setError, formState: {errors}, clearErrors } = useForm();
+  const isLoggedIn = useSelector(state =>  state.auth.status);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const isLoggedIn = useSelector(state =>  state.auth.status);
 
   // for signup page protection
   useEffect(() => {
@@ -23,6 +23,7 @@ function Signup() {
 
   const signup = async(data) => {
     try {
+      setSignupLoading(true);
       const userDetails = await authService.createAccount(data);
       if (userDetails) {
         const userData = await authService.getCurrentUser();
@@ -36,6 +37,8 @@ function Signup() {
       setTimeout(() => {
         clearErrors('auth_service_error')
       }, 7000);
+    } finally {
+      setSignupLoading(false);
     }
   }
   return (
@@ -86,7 +89,7 @@ function Signup() {
               })}
             />
             <p className='text-red-900 text-sm'>{errors?.password?.message}</p>
-            <Button type="submit">Signup</Button>
+            <Button type="submit">{signUpLoading ? (<BtnLoader />) : "Signup"}</Button>
           </form>
         </div>
       </div>

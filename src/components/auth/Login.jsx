@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {Input, Button} from '../index';
+import {Input, Button, BtnLoader} from '../index';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import authService from '../../appwrite/authService';
@@ -8,6 +8,7 @@ import { login as authLogin } from '../../redux/features/authSlice';
 
 function Login() {
   const {register, handleSubmit, formState: {errors}, setError, clearErrors} = useForm();
+  const [loaginLoader, setLoginLoader] = useState(false)
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -22,6 +23,7 @@ function Login() {
   const login = async(data) => {
     console.log(data);
     try {
+      setLoginLoader(true)
       const userDetails = await authService.loginUser(data);
       if (userDetails) {
         const userData = await authService.getCurrentUser();
@@ -35,6 +37,8 @@ function Login() {
       setTimeout(() => {
         clearErrors('auth_service_error')
       }, 7000);
+    } finally {
+      setLoginLoader(false)
     }
   }
 
@@ -70,7 +74,7 @@ function Login() {
               })}
             />
             <p className='text-red-900 text-sm'>{errors?.password?.message}</p>
-            <Button type="submit">Login</Button>
+            <Button type="submit">{loaginLoader ? (<BtnLoader />) : "Signup"}</Button>
           </form>
         </div>
       </div>

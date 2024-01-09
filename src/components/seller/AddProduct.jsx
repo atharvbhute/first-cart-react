@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import {Input, Button, Select} from "../index";
+import {Input, Button, Select, BtnLoader} from "../index";
 import { productService } from '../../appwrite/productService';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,6 +8,7 @@ function AddProduct() {
   const {register, handleSubmit, control, formState: {errors}, setError, clearErrors} = useForm();
   const [options, setOptions] = React.useState([]);
   const navigate = useNavigate();
+  const [productLoader, setProductLoader] = useState(false);
 
   useEffect(()=>{
     productService.listCategories()
@@ -21,6 +22,7 @@ function AddProduct() {
       data.file[0]?.type == "image/jpeg"
     ) {
       try {
+        setProductLoader(true)
         const file = await productService.uploadImage(data.file[0]);
         if (file) {
           const product = await productService.createProduct({
@@ -33,6 +35,8 @@ function AddProduct() {
       } catch (error) {
         setError("service_error",{type: "custom", message: error})
         setTimeout( () => clearErrors("service_error"), 10000)
+      } finally{
+        setProductLoader(false)
       }
     } else {
       setError("file", { type: "custom", message: "file must be jpg" });
@@ -108,7 +112,7 @@ function AddProduct() {
             })}
             />
             <p className='text-red-900 text-sm'>{errors?.category_id?.message}</p>
-            <Button type="submit">Add Product</Button>
+            <Button type="submit">{productLoader ? (<BtnLoader />) : "Add Product"}</Button>
           </form>
         </div>
       </div>

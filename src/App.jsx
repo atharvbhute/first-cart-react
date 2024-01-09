@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Sidebar, Header, Footer } from './components/index'
+import { Sidebar, Header, Footer, BodyLoader } from './components/index'
 import { productService } from './appwrite/productService';
 import { useDispatch } from 'react-redux';
 import authService from './appwrite/authService';
@@ -39,16 +39,10 @@ function App() {
     <Footer />
     </>
   ) : (
-    <ClipLoader
-        color={"blue"}
-        loading={loader}
-        cssOverride={{display: "block",
-        margin: "0 auto",
-        borderColor: "blue",}}
-        size={20}
-        aria-label="Loading Spinner"
-        data-testid="loader"
-      />
+    <div className='flex justify-center items-center'>
+      <BodyLoader />
+    </div>
+    
   )
 }
 export default App

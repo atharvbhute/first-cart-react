@@ -13,9 +13,11 @@ import ProductCard from "./ProductCard";
 import Select from "./Select";
 import CartBtn from "./CartBtn";
 import CartItem from "./Cart/CartItem";
-
+import PageLoader from "./loader/PageLoader";
+import BodyLoader from "./loader/BodyLoader";
+import BtnLoader from "./loader/BtnLoader";
 
 export { Sidebar, Header, Logo, AuthBtn, Footer, Login, 
     Signup, Logout, AddProduct, Input, Button, ProductCard,
-    Select, CartBtn, CartItem
+    Select, CartBtn, CartItem, PageLoader, BodyLoader, BtnLoader
 }
