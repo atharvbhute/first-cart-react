@@ -22,7 +22,10 @@ function ListProducts() {
 
   if (productLoadingState != "fulfilled") {
     return (
-      <PageLoader />
+      <div className='h-screen flex items-center'>
+        <PageLoader />
+      </div>
+      
     )
   }else{
     return (

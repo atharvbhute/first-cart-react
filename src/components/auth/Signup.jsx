@@ -14,13 +14,6 @@ function Signup() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // for signup page protection
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate("/")
-    }
-  },[]);
-
   const signup = async(data) => {
     try {
       setSignupLoading(true);

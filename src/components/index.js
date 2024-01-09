@@ -16,8 +16,12 @@ import CartItem from "./Cart/CartItem";
 import PageLoader from "./loader/PageLoader";
 import BodyLoader from "./loader/BodyLoader";
 import BtnLoader from "./loader/BtnLoader";
+import AuthLayout from "./auth/AuthLayout";
+import AuthLogin from "./auth/AuthLogin";
+
 
 export { Sidebar, Header, Logo, AuthBtn, Footer, Login, 
     Signup, Logout, AddProduct, Input, Button, ProductCard,
-    Select, CartBtn, CartItem, PageLoader, BodyLoader, BtnLoader
+    Select, CartBtn, CartItem, PageLoader, BodyLoader, BtnLoader, AuthLayout,
+    AuthLogin
 }

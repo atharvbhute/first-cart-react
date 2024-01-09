@@ -13,12 +13,6 @@ function Login() {
   const navigate = useNavigate();
 
   const isLoggedIn = useSelector(state =>  state.auth.status);
-// for signin page protection
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate("/")
-    }
-  },[]);
 
   const login = async(data) => {
     console.log(data);

@@ -31,18 +31,17 @@ function App() {
   },[]);
 
   return !loader ? (
-    <>
-    <Header />
-    <div className='flex justify-center px-7 py-4'>
-      <Outlet />
+    <div className='h-screen flex flex-col justify-between'>
+      <Header />
+      <div className="flex justify-center px-7 py-4">
+        <Outlet />
+      </div>
+      <Footer />
     </div>
-    <Footer />
-    </>
   ) : (
-    <div className='flex justify-center items-center'>
+    <div className="h-screen flex justify-center items-center">
       <BodyLoader />
     </div>
-    
-  )
+  );
 }
 export default App
